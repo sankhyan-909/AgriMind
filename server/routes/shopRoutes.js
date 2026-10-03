@@ -1,0 +1,12 @@
+const express = require("express");
+const { protect, authorize } = require("../middleware/authMiddleware");
+const { getCart, saveCart, clearCart, getWishlist, toggleWishlist, removeWishlist } = require("../controllers/shopController");
+const router = express.Router();
+router.use(protect, authorize("buyer"));
+router.get("/cart", getCart);
+router.put("/cart", saveCart);
+router.delete("/cart", clearCart);
+router.get("/wishlist", getWishlist);
+router.post("/wishlist/toggle", toggleWishlist);
+router.delete("/wishlist/:id", removeWishlist);
+module.exports = router;
